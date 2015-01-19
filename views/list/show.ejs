@@ -1,0 +1,82 @@
+<%
+  var owner= list.owner.username;
+  if (list.owner.id == req.session.user.id) {
+    var owner= "you";
+  }
+%>
+<div class="well">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2><%= list.name %></h2>
+    </div>
+    <div class="col-sm-4">
+      <span>Created by: <%= owner %></span>
+    </div>
+  </div>
+  <div class="row">
+    <button class="btn btn-default" data-toggle="modal" data-target="#add-new-item">Add Item</button>
+  </div>
+  <div class="row list_items">
+    <% if(list.items.length) { %>
+      <% list.items.forEach(function(item){ %>
+        <div class="list_item">
+          <div class="checkbox">
+            <label><input type="checkbox" class="item_checkbox" data-item_id="<%= item.id %>" <%= item.done? "checked" : "" %> ><%= item.name %></label>
+            <p class="col-lg-8 col-lg-offset-4">
+              <span class="description"><%= item.description %></span>
+              <span class="pull-right" class="price"><%= item.price %></span>
+            </p>
+          </div>
+        </div>
+      <% }); %>
+    <% } %>
+  </div>
+</div>
+<div id="add-new-item" class="modal fade" tabindex="-1" style="display:none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Shared with:</h4>
+      </div>
+      <form role="form" id="createNewItem" action="/lists/<%= list.id %>/add_item" method="post" class="form-horizontal">
+        <div class="modal-body">
+          <input id="inputName" name="name" class="form-control floating-label" type="text" placeholder="Item Name">
+          <input id="inputDescription" name="description" class="form-control floating-label" type="textarea" placeholder="Item Description">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="list-users" class="modal fade" tabindex="-1" style="display:none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Shared with:</h4>
+      </div>
+      <div class="modal-body">
+        // share with someone
+        <input id="inputName" name="name" class="form-control floating-label" type="text" placeholder="Name you List">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="hidden_stuff" style="display:none;">
+  <div class="list_item">
+    <div class="checkbox">
+      <label></label>
+      <p class="col-lg-8 col-lg-offset-4">
+        <span class="description"></span>
+        <span class="pull-right price"></span>
+      </p>
+    </div>
+  </div>
+</div>

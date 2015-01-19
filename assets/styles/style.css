@@ -1,0 +1,16 @@
+.modal-dialog {
+  z-index: 9999 !important;
+}
+
+
+.dim
+{
+  height:100%;
+  width:100%;
+  position:fixed;
+  left:0;
+  top:0;
+  display: none;
+  z-index:999999 !important;
+  background-color:rgba(0,0,0,0.6);
+}

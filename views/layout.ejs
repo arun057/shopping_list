@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shoppping List</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/material-wfont.min.css">
+    <link rel="stylesheet" href="/styles/ripples.min.css">
+    <link rel="stylesheet" href="/styles/jquery.dropdown.css">
+    <link rel="stylesheet" href="/styles/material.min.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <!--STYLES END-->
+
+    <script src="/js/dependencies/jquery-1.10.2.min.js"></script>
+  </head>
+
+  <body>
+    <div class="dim"></div>
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="javascript:void(0)">Shopping List</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Dashboard</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if (typeof(req.session.user) !='undefined' && req.session.user.username ) { %>
+          <li class="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><%= req.session.user.username %><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="javascript:void(0)">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="/logout">Log Out</a></li>
+            </ul>
+          </li>
+          <% } else { %>
+            <li><a href="/login">Login</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+    <%- body %>
+    </div>
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/dependencies/bootstrap.min.js"></script>
+    <script src="/js/dependencies/material.min.js"></script>
+    <script src="/js/dependencies/ripples.min.js"></script>
+    <script src="/js/dependencies/jquery.dropdown.js"></script>
+    <script src="/js/dependencies/moment.min.js"></script>
+    <script src="/js/item.js"></script>
+    <!--SCRIPTS END-->
+    <script type="text/javascript">
+      $(document).on('ready', function(){
+        $.material.init();
+      });
+    </script>
+  </body>
+</html>
